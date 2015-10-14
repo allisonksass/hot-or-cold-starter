@@ -20,8 +20,8 @@ function numGenerator() {
 	console.log(secretNumber);
 };
 
-//Running the secret number generator
 numGenerator();
+
 
 //Increasing guess count
 function increaseGuessCount() {
@@ -29,26 +29,42 @@ function increaseGuessCount() {
 	}
 
 
+
+
+
+	
+
 //User enters guess into box
 
 $("#guessButton").on ('click', function(event) {
 
-//Adding user guess to list
+//Adding user's guess to list and clearing input
 event.preventDefault();
-var inputGuess= $("#userGuess").val ();
+var inputGuess= parseInt($("#userGuess").val (),10);
+var distanceFromNum = Math.abs(inputGuess - secretNumber);
+
+
+//Making sure user's input is a number
+if (inputGuess == "" || inputGuess %1 != 0 || inputGuess < 0 || inputGuess > 100){
+		alert("Please enter a number between 1 and 100");
+
+	}
+
+else{
+
 $("#guessList").append('<li>'+inputGuess+'</li>');
 $("#userGuess").val('');
 
+
+
 //Comparing user guess to the secret number and determining which #feedback to show
-
-var distanceFromNum = Math.abs(inputGuess - secretNumber);
-
-	//hot
+	
+		//hot
         if (distanceFromNum == 0) {
             $("#feedback").text("Woohoo! You got it!");
-			$("#userGuess").attr("disabled",true);
+			
         } else if (distanceFromNum <= 5) {
-            $("#feedback").text("Getting hot!");
+            $("#feedback").text("Hot, hot, hot!");
         }
         //warm
         else if (distanceFromNum <= 15) {
@@ -61,10 +77,27 @@ var distanceFromNum = Math.abs(inputGuess - secretNumber);
         else  {
         	$("#feedback").text("You're basically an ice cube.");
         }
+}
 //Running guess count function every click
 increaseGuessCount();
 
 });
+
+
+//Starting a new game
+
+
+  $('.new').on('click', function(){
+        startNewGame();
+    });
+
+  function startNewGame () {
+  	 $('#guessList li').remove();
+      $("#feedback").text( " Make your Guess!")
+      $('#count').html(0);
+      numGenerator();
+
+  	}
 
 
 
