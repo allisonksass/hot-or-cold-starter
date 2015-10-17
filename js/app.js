@@ -30,10 +30,6 @@ function increaseGuessCount() {
 
 
 
-
-
-	
-
 //User enters guess into box
 
 $("#guessButton").on ('click', function(event) {
@@ -54,8 +50,6 @@ else{
 
 $("#guessList").append('<li>'+inputGuess+'</li>');
 $("#userGuess").val('');
-
-
 
 //Comparing user guess to the secret number and determining which #feedback to show
 	
@@ -78,6 +72,7 @@ $("#userGuess").val('');
         	$("#feedback").text("You're basically an ice cube.");
         }
 }
+
 //Running guess count function every click
 increaseGuessCount();
 
@@ -98,8 +93,6 @@ increaseGuessCount();
       numGenerator();
 
   	}
-
-
 
 
 });
